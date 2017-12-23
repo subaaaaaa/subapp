@@ -4,13 +4,15 @@ http://imabari.hateblo.jp/entry/2017/10/09/223748
 2.Django 2.0 To Python3.6.3
 sudo pip3 install django
 
-3.To Heroku
+3.Heroku Template
 https://qiita.com/soogie/items/34b8c34f182a6caa8bb5
 
+4.Heroku needed python
 django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile c9
 $ sudo pip3 install dj-database-url
 $ sudo pip3 install Whitenoise
 $ sudo pip3 install Gunicorn
+
 
 $ psql --version
 psql (PostgreSQL) 9.3.11
@@ -70,6 +72,8 @@ python-apt===0.9.3.5ubuntu2
 numpy==1.8.2
 matplotlib==1.3.1
 unattended-upgrades==0.1
+scipy==0.13.3
+
 
 
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
