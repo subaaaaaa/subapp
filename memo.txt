@@ -1,0 +1,70 @@
+1.Python3 install
+http://imabari.hateblo.jp/entry/2017/10/09/223748
+
+2.Django 2.0 To Python3.6.3
+sudo pip3 install django
+
+3.To Heroku
+https://qiita.com/soogie/items/34b8c34f182a6caa8bb5
+
+django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile c9
+$ sudo pip3 install dj-database-url
+$ sudo pip3 install Whitenoise
+$ sudo pip3 install Gunicorn
+
+$ psql --version
+psql (PostgreSQL) 9.3.11
+$ sudo service postgresql status
+9.3/main (port 5432): down
+$ sudo service postgresql start
+ * Starting PostgreSQL 9.3 database server
+    ...done.
+
+subaaa:~/workspace $ sudo pip3 install psycopg2
+The directory '/home/ubuntu/.cache/pip/http' or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.
+The directory '/home/ubuntu/.cache/pip' or its parent directory is not owned by the current user and caching wheels has been disabled. check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.
+Collecting psycopg2
+  Downloading psycopg2-2.7.3.2-cp36-cp36m-manylinux1_x86_64.whl (2.7MB)
+    100% |████████████████████████████████| 2.7MB 542kB/s 
+Installing collected packages: psycopg2
+Successfully installed psycopg2-2.7.3.2
+
+settings.py
+# FOR HEROKU
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'subaaadb',
+                # The following settings are not used with sqlite3:
+                'USER': 'subaaa',
+                'PASSWORD': 'subaaa!!!',
+                'HOST': '127.0.0.1', 
+                'PORT': 5432, 
+            }
+}
+
+postgres=# CREATE ROLE subaaa LOGIN;
+CREATE ROLE
+postgres=# \password subaaa
+Enter new password: 
+Enter it again: 
+postgres=# CREATE DATABASE subaaadb OWNER subaaa ENCODING 'UTF8' TEMPLATE template0;
+CREATE DATABASE
+postgres=# \q
+
+
+python3 manage.py migrate                                                                                                                 
+python3 manage.py createsuperuser                                                                                                         
+
+Username (leave blank to use 'ubuntu'): subaaa
+Email address: suba1124@gmail.com
+Password: 
+Password (again): 
+Superuser created successfully.
+
+pip3 freeze > requirements.txt
+deleted requirements
+numpy==1.8.2
+matplotlib==1.3.1
+
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
