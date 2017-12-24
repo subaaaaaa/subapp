@@ -1,6 +1,6 @@
-var service_worker_version = '011';
+var service_worker_version = '015';
 
-importScripts('/cache-polyfill.js');
+importScripts('./cache-polyfill.js');
 
 // インストール時 (register時) に静的ファイルをキャッシュしておく
 self.oninstall = function(event) {

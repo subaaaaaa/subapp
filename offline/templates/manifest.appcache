@@ -1,0 +1,21 @@
+CACHE MANIFEST
+# Ver.20150723_023
+
+CACHE:
+#../js/appcache.js,
+#../../customer_list_ios,
+/static/css/bootstrap.min.css,
+#../css/bootstrap-theme.min.css,
+#../js/bootstrap.min.js,
+#../js/jquery-2.2.4.min.js,
+#../js/indexeddb.js,
+#../css/offline.css,
+
+NETWORK:
+#alwaysnetwork.html
+
+FALLBACK:
+#*.html fallback.html
+
+SETTINGS:
+prefer-online

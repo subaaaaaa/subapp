@@ -4,30 +4,40 @@
 {% block title %}offline web sample test{% endblock title %}
 
 {% block extrahead %}
-<script src='page.js'></script>
+<script src='/page.js'></script>
 <script src="{% static 'js/indexeddb.js' %}"></script>
 {% endblock %}
 
 {% block content %}
+<h3 class="page-header">offline web sample test</h3>
+<form>
+  <div class="row">
+    <div class="form-group">
+      <label>key:</label><input type="text" id="key" size="30" maxlength="20" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>val:</label><input type="text" id="val" size="30" maxlength="20" class="form-control">
+    </div>
+  </div>
 
-    <h3 class="page-header">offlie web sample test</h3>
-    <div class="row">
-      <div class="col-sm-4">
-        key:<input type="text" id="key" size="30" maxlength="20">
-      </div>
-      <div class="col-sm-4">
-        val:<input type="text" id="val" size="30" maxlength="20">
-      </div>
-      <div class="col-sm-4">
-        <input id="add" type="button" value="追加">
-        <input id="read" type="button" value="読み込み">
-        <input id="delall" type="button" value="全削除">
+  <div class="row">
+    <div class="pull-right">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button id="add" type="button" class="btn btn-primary">追加</button>
+        <button id="read" type="button" class="btn btn-success">読み込み</button>
+        <button id="delall" type="button" class="btn btn-danger">全削除</button>
       </div>
     </div>
-    <div class="row">
-      <p id="log">
+  </div>
+  
+  <div class="row" style="margin-top:10px">
+    <div class="panel panel-default">
+      <div class="panel-heading">Service Worker Status</div>
+      <div class="panel-body" id="log">Panel Content</div>
     </div>
-    <div class="row">
-      <ul id="list"></ul>
-    </div>
+    <h4>Indexed DB Data(Local Strage)</h4>
+    <ul class="list-group" id="list"></ul>
+  </div>
+</form>
+
 {% endblock content %}

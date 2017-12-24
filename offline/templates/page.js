@@ -2,7 +2,7 @@ function log(msg) {
   document.querySelector('#log').textContent = msg;
 }
 
-navigator.serviceWorker.register('./sw.js', {scope:'./'})
+navigator.serviceWorker.register('/sw.js', {scope:'/'})
   .then(function(sw) {
       if (navigator.serviceWorker.controller) {
         log('このページは ServiceWorker にコントロールされています');
