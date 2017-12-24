@@ -1,3 +1,5 @@
+var service_worker_version = '011';
+
 importScripts('/cache-polyfill.js');
 
 // インストール時 (register時) に静的ファイルをキャッシュしておく
@@ -25,5 +27,10 @@ self.oninstall = function(event) {
 // ページヘのネットワークリクエストが来たらキャッシュにある
 // データを返す
 self.onfetch = function(event) {
-  event.respondWith(caches.match(event.request));
+    //event.respondWith(caches.match(event.request));
+    event.respondWith(
+        caches.match(event.request, {ignoreSearch:true}).then(response => {
+            return response || fetch(event.request);
+        })
+    );
 };

@@ -1,3 +1,5 @@
+//https://dev.classmethod.jp/ria/html5/html5-indexed-database-api/
+
 $(function(){
     $('#add').on('click',function(){
         var key = $('#key').val();
@@ -13,7 +15,7 @@ $(function(){
     });  
 
     $('#read').on('click',function(){
-        $("#list").empty()
+        $("#list").empty();
       
         var transaction = db.transaction(["mystore"], "readwrite");
         var store = transaction.objectStore("mystore");
@@ -32,6 +34,16 @@ $(function(){
           cursor.continue();
         }
     });  
+    
+    $('#delall').on('click',function(){
+      var transaction = db.transaction(["mystore"], "readwrite");
+      var store = transaction.objectStore("mystore");
+      var request = store.clear();
+      request.onsuccess = function (event) {
+        // 全件削除後の処理
+        $("#list").empty();
+      }
+    });
 
 });
 

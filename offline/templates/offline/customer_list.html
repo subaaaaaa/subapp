@@ -1,27 +1,33 @@
 {% extends "offline/base.html" %}
 {% load staticfiles %}
 
-{% block title %}顧客一覧{% endblock title %}
+{% block title %}offline web sample test{% endblock title %}
 
 {% block extrahead %}
 <script src='page.js'></script>
 <script src="{% static 'js/indexeddb.js' %}"></script>
-<style>
-table {
-  margin-top: 8px;
-}
-</style>
-
 {% endblock %}
 
 {% block content %}
 
-    <h3 class="page-header">顧客一覧</h3>
-    key:<input type="text" id="key" size="30" maxlength="20">
-    val:<input type="text" id="val" size="30" maxlength="20">
-    <input id="add" type="button" value="追加">
-    <input id="read" type="button" value="読み込み">
-    <p id="log">
-    <ul id="list">
-    </ul>
+    <h3 class="page-header">offlie web sample test</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        key:<input type="text" id="key" size="30" maxlength="20">
+      </div>
+      <div class="col-sm-4">
+        val:<input type="text" id="val" size="30" maxlength="20">
+      </div>
+      <div class="col-sm-4">
+        <input id="add" type="button" value="追加">
+        <input id="read" type="button" value="読み込み">
+        <input id="delall" type="button" value="全削除">
+      </div>
+    </div>
+    <div class="row">
+      <p id="log">
+    </div>
+    <div class="row">
+      <ul id="list"></ul>
+    </div>
 {% endblock content %}
