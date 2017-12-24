@@ -14,3 +14,7 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "c9.settings")
 
 application = get_wsgi_application()
+
+# https://djangogirlsjapan.gitbooks.io/workshop_tutorialjp/content/deploy/
+from whitenoise.django import DjangoWhiteNoise
+application = DjangoWhiteNoise(application)
