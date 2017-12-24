@@ -1,8 +1,10 @@
 {% extends "offline/base.html" %}
+{% load staticfiles %}
 
 {% block title %}顧客一覧{% endblock title %}
 
 {% block extrahead %}
+<script src='page.js'></script>
 <style>
 table {
   margin-top: 8px;
@@ -12,6 +14,7 @@ table {
 
 {% block content %}
     <h3 class="page-header">顧客一覧</h3>
+    <p id="log">
     <table class="table table-striped table-bordered">
     <thead>
       <tr>
