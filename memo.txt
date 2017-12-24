@@ -113,3 +113,9 @@ subaaa:~/workspace (master) $ sudo mv /usr/bin/python /usr/bin/python2
 subaaa:/usr/bin $ sudo ln -s /usr/bin/python3.6 /usr/bin/python
 subaaa:/usr/bin $ python --version
 Python 3.6.3
+
+# heroku control
+heroku login
+git add -A
+git commit -m 'initial'
+git push heroku master
