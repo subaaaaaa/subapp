@@ -13,3 +13,5 @@ navigator.serviceWorker.register('./sw.js', {scope:'./'})
   .catch(function(err) {
     log('ServiceWorker の登録に失敗しました: ' + err);
   });
+
+
