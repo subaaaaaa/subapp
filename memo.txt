@@ -119,3 +119,9 @@ heroku login
 git add -A
 git commit -m 'initial'
 git push heroku master
+
+# github
+# ssh key
+cat ~/.ssh/id_rsa.pub
+
+git@github.com:subaaaaaa/subapp.git
