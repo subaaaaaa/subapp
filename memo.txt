@@ -125,3 +125,7 @@ git push heroku master
 cat ~/.ssh/id_rsa.pub
 
 git@github.com:subaaaaaa/subapp.git
+
+git reset --hard HEAD
+
+sudo service postgresql start
