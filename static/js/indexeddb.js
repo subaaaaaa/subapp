@@ -1,64 +1,61 @@
 //https://dev.classmethod.jp/ria/html5/html5-indexed-database-api/
+var dbName = "mydb";
+var dbVersion = "1.0";
+var storeName  = 'mystore'; // Table
 var db;
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.msIndexedDB;
 
-$(function(){
+function initIndexedDB(type){
   if (indexedDB) {
-    // データベースを削除したい場合はコメントを外します。
-    //indexedDB.deleteDatabase("mydb");
-    var openRequest = indexedDB.open("mydb", 1.0);
+    var openRequest = indexedDB.open(dbName, dbVersion);
      
     openRequest.onupgradeneeded = function(event) {
       // データベースのバージョンに変更があった場合(初めての場合もここを通ります。)
       db = event.target.result;
-      var store = db.createObjectStore("mystore", { keyPath: "mykey"});
-       
-      // インデックスを作成します。
-      store.createIndex("myvalueIndex", "myvalue");
+      var store = db.createObjectStore(storeName, { keyPath: "lno"});
     }
      
     openRequest.onsuccess = function(event) {
       db = event.target.result;
-      readAll();
+      console.log('IndexedDB Version:' + db.version);
+      if(type==1){
+        readAll();
+      } else if (type==2) {
+        setSyncAll();
+      } else if (type==3) {
+        delUploadedAll();
+      }
     }
   } else {
     window.alert("このブラウザではIndexed DataBase API は使えません。");
   }
+}
 
-  $('#add').on('click',function(){
-      var key = $('#key').val();
-      var val = $('#val').val();
-      var transaction = db.transaction(["mystore"], "readwrite");
-      var store = transaction.objectStore("mystore");
-      var request = store.put({ mykey: key, myvalue: val});
-      request.onsuccess = function (event) {
-        // 更新後の処理
-        $('#key').val("");
-        $('#val').val("");
-        readAll();
-      }
-  });  
-
-  $('#read').on('click',function(){
-    readAll();
-  });  
-  
-  $('#delall').on('click',function(){
-    var transaction = db.transaction(["mystore"], "readwrite");
-    var store = transaction.objectStore("mystore");
-    var request = store.clear();
-    request.onsuccess = function (event) {
-      // 全件削除後の処理
-      $("#list").empty();
-    }
+function addRecord(){
+  var transaction = db.transaction(storeName, "readwrite");
+  var store = transaction.objectStore(storeName);
+  var request = store.put({
+    lno: $('#lno').val(), 
+    jname: $('#jname').val(),
+    tel: $('#tel').val(),
+    postal: $('#postal').val(),
+    address: $('#address').val(),
+    address2: $('#address2').val(),
+    address3: $('#address3').val(),
   });
-});
+  request.onsuccess = function (event) {
+    // 更新後の処理
+    $('.linfo').val("");
+    $('#lno').val(getUniqueStr());
+    readAll();
+  }
+}
 
 function readAll(){
   $("#list").empty();
 
-  var transaction = db.transaction(["mystore"], "readwrite");
-  var store = transaction.objectStore("mystore");
+  var transaction = db.transaction(storeName, "readonly");
+  var store = transaction.objectStore(storeName);
   var request = store.openCursor();
    
   request.onsuccess = function (event) {
@@ -69,8 +66,76 @@ function readAll(){
      
     var cursor = event.target.result;
     var data = cursor.value;
-    $('#list').append('<li class="list-group-item">key:' + cursor.key + ' / val:' + data.myvalue + '</li>')
-    console.log("key："  + cursor.key +  "  value：" + data.myvalue);
+    $('#list').append('<li class="list-group-item">'
+      + 'lNo:' + cursor.key 
+      + ' / 氏名:' + data.jname
+      + ' / 電話番号:' + data.tel
+      + ' / 郵便番号:' + data.postal
+      + ' / 住所:' + data.address + data.address2 + data.address3
+      + '</li>'
+    );
     cursor.continue();
   }
+}
+
+function delAll(){
+    var transaction = db.transaction(storeName, "readwrite");
+    var store = transaction.objectStore(storeName);
+    var request = store.clear();
+    request.onsuccess = function (event) {
+      // 全件削除後の処理
+      $("#list").empty();
+    }
+}
+
+function delRecord(lno){
+    var transaction = db.transaction(storeName, "readwrite");
+    var store = transaction.objectStore(storeName);
+    var request = store.delete(lno);
+
+    request.onsuccess = function (event) {
+      console.log('Delete:' + lno);
+    }
+}
+
+
+function setSyncAll(){
+  var transaction = db.transaction(storeName, "readonly");
+  var store = transaction.objectStore(storeName);
+  var request = store.openCursor();
+  var rowcount = 0;
+  var formkey = 'id_form-*-'
+  request.onsuccess = function (event) {
+   
+    if(event.target.result == null) {
+      return;
+    }
+     
+    var cursor = event.target.result;
+    var data = cursor.value;
+    
+    $('#' + formkey.replace('*', rowcount) + 'lno').val(cursor.key);
+    $('#' + formkey.replace('*', rowcount) + 'jname').val(data.jname);
+    $('#' + formkey.replace('*', rowcount) + 'tel').val(data.tel);
+    $('#' + formkey.replace('*', rowcount) + 'postal').val(data.postal);
+    $('#' + formkey.replace('*', rowcount) + 'address1').val(data.address);
+    $('#' + formkey.replace('*', rowcount) + 'address2').val(data.address2);
+    $('#' + formkey.replace('*', rowcount) + 'address3').val(data.address3);
+    
+    rowcount++;
+    cursor.continue();
+  }
+}
+
+function delUploadedAll(){
+  $(".lno").each(function() {
+    delRecord($(this).text());
+  });  
+}
+
+
+function getUniqueStr(myStrong){
+ var strong = 1000;
+ if (myStrong) strong = myStrong;
+ return new Date().getTime().toString(10) //+ Math.floor(strong*Math.random()).toString(10)
 }

@@ -1,0 +1,65 @@
+{% extends "offline/base.html" %}
+{% load staticfiles %}
+
+{% block title %}offline web sample test{% endblock title %}
+
+{% block extrahead %}
+<!--<script src='/sw.js'></script>-->
+<script src="{% static 'js/indexeddb.js' %}"></script>
+<script>
+$(function(){
+  initIndexedDB(2);
+});
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <h3 class="page-header">sync</h3>
+
+    <form action="" method="POST">
+      <button type="submit" class="btn btn-primary">送信</button>
+      {{ form.management_form }} 
+      <table class="table">
+        <thead>
+          <tr>
+            <th>削除</th>
+            <th>lNo</th>
+            <th>氏名</th>
+            <th>電話番号</th>
+            <th>郵便番号</th>
+            <th>住所1</th>
+            <th>住所2</th>
+            <th>住所3</th>
+          </tr>
+        </thead>
+        <tbody>
+      {% for fm in form %}
+        {{ fm.id }}
+          <tr>
+            <td>
+              {% if fm.instance.pk %}
+              {{ fm.DELETE }}
+              {% endif %}
+            </td>
+            <td>{{ fm.lno }}</td>
+            <td>{{ fm.jname }}</td>
+            <td>{{ fm.tel }}</td>
+            <td>{{ fm.postal }}</td>
+            <td>{{ fm.address1 }}</td>
+            <td>{{ fm.address2 }}</td>
+            <td>{{ fm.address3 }}</td>
+          </tr>
+      {% endfor %}
+          </tbody>
+        </table>
+        {% csrf_token %}
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

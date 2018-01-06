@@ -1,0 +1,55 @@
+{% extends "offline/base.html" %}
+{% load staticfiles %}
+
+{% block title %}offline web sample test{% endblock title %}
+
+{% block extrahead %}
+<!--<script src='/sw.js'></script>-->
+<script src="{% static 'js/indexeddb.js' %}"></script>
+<script>
+$(function(){
+  initIndexedDB(3);
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+
+    <h3 class="page-header">offline web sample test</h3>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>lNo</th>
+              <th>氏名</th>
+              <th>電話番号</th>
+              <th>郵便番号</th>
+              <th>住所1</th>
+              <th>住所2</th>
+              <th>住所3</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for lead in leads %}
+            <tr>
+              <td class="lno">{{ lead.lno }}</td>
+              <td>{{ lead.jname }}</td>
+              <td>{{ lead.tel }}</td>
+              <td>{{ lead.postal }}</td>
+              <td>{{ lead.address1 }}</td>
+              <td>{{ lead.address2 }}</td>
+              <td>{{ lead.address3 }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -128,4 +128,6 @@ git@github.com:subaaaaaa/subapp.git
 
 git reset --hard HEAD
 
+python3 manage.py makemigrations offline
+
 sudo service postgresql start
