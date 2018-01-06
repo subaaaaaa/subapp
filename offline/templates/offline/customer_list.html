@@ -31,7 +31,8 @@ $(function(){
   <div class="col-sm-12">
 
     <h3 class="page-header">offline web sample test / {{ version }}</h3>
-
+    <h4><a href="{% url 'offline/customer_sync' %}">サーバに同期する</a></h4>
+    <h4><a href="{% url 'offline/customer_uploaded_list' %}">サーバ同期済みを確認</a></h4>
     <form>
       <div class="row">
           <div class="col-sm-12">
