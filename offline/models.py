@@ -7,6 +7,6 @@ class Lead(models.Model):
     tel = models.CharField(max_length=20)
     postal = models.CharField(max_length=15)
     address1 = models.CharField(max_length=100)
-    address2 = models.CharField(max_length=100, null=True)
-    address3 = models.CharField(max_length=100, null=True)
+    address2 = models.CharField(max_length=100, null=True, blank=True)
+    address3 = models.CharField(max_length=100, null=True, blank=True)
     created_date = models.DateTimeField(default=timezone.now)

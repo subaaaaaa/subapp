@@ -3,6 +3,8 @@ import datetime
 from django.views.generic.edit import FormView
 from offline.forms import LeadSyncFormSet
 from offline.models import Lead
+from django.contrib import messages  # メッセージフレームワーク
+
 
 def customer_list(request):
     return render(request, 'offline/customer_list.html', {})
@@ -18,4 +20,11 @@ class AddView(FormView):
  
     def form_valid(self, form):
         form.save()
+        ''' バリデーションを通った時 '''
+        messages.success(self.request, "保存しました")
         return super().form_valid(form)
+        
+    def form_invalid(self, form):
+        ''' バリデーションに失敗した時 '''
+        messages.warning(self.request, "保存できませんでした")
+        return super().form_invalid(form)

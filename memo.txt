@@ -114,7 +114,7 @@ subaaa:/usr/bin $ sudo ln -s /usr/bin/python3.6 /usr/bin/python
 subaaa:/usr/bin $ python --version
 Python 3.6.3
 
-# heroku control
+# heroku deploy
 heroku login
 git add -A
 git commit -m 'initial'
@@ -125,10 +125,13 @@ heroku run python manage.py migrate
 # ssh key
 cat ~/.ssh/id_rsa.pub
 
-git@github.com:subaaaaaa/subapp.git
+# github push
+git push git@github.com:subaaaaaa/subapp.git master
 
+# source reset
 git reset --hard HEAD
 
+# Model Migrate
 python3 manage.py makemigrations offline
 
 sudo service postgresql start
