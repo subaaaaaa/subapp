@@ -30,45 +30,49 @@ $(function(){
     {% endif %}
 
     <form action="" method="POST">
-      <button type="submit" class="btn btn-primary">送信</button>
+      <button type="submit" class="btn btn-primary pull-right">サーバに同期</button>
       {{ form.management_form }} 
-      <table class="table">
-        <thead>
-          <tr>
-            <!--<th>削除</th>-->
-            <th>lNo</th>
-            <th>氏名</th>
-            <th>カナ</th>
-            <th>電話番号</th>
-            <th>郵便番号</th>
-            <th>住所1</th>
-            <th>住所2</th>
-            <th>住所3</th>
-          </tr>
-        </thead>
-        <tbody>
-      {% for fm in form %}
-        {{ fm.id }}
-          <tr>
-            <!--
-            <td>
-              {% if fm.instance.pk %}
-              {{ fm.DELETE }}
-              {% endif %}
-            </td>
-            -->
-            <td>{{ fm.lno }}</td>
-            <td>{{ fm.jname }}</td>
-            <td>{{ fm.kname }}</td>
-            <td>{{ fm.tel }}</td>
-            <td>{{ fm.postal }}</td>
-            <td>{{ fm.address1 }}</td>
-            <td>{{ fm.address2 }}</td>
-            <td>{{ fm.address3 }}</td>
-          </tr>
-      {% endfor %}
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <!--<th>削除</th>-->
+                <th>lNo</th>
+                <th>氏名</th>
+                <th>カナ</th>
+                <th>電話番号</th>
+                <th>郵便番号</th>
+                <th>住所1</th>
+                <th>住所2</th>
+                <th>住所3</th>
+              </tr>
+            </thead>
+            <tbody>
+          {% for fm in form %}
+            {{ fm.id }}
+              <tr>
+                <!--
+                <td>
+                  {% if fm.instance.pk %}
+                  {{ fm.DELETE }}
+                  {% endif %}
+                </td>
+                -->
+                <td>{{ fm.lno }}</td>
+                <td>{{ fm.jname }}</td>
+                <td>{{ fm.kname }}</td>
+                <td>{{ fm.tel }}</td>
+                <td>{{ fm.postal }}</td>
+                <td>{{ fm.address1 }}</td>
+                <td>{{ fm.address2 }}</td>
+                <td>{{ fm.address3 }}</td>
+              </tr>
+          {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
         {% csrf_token %}
     </form>
   </div>
