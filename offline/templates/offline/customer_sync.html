@@ -35,9 +35,10 @@ $(function(){
       <table class="table">
         <thead>
           <tr>
-            <th>削除</th>
+            <!--<th>削除</th>-->
             <th>lNo</th>
             <th>氏名</th>
+            <th>カナ</th>
             <th>電話番号</th>
             <th>郵便番号</th>
             <th>住所1</th>
@@ -49,13 +50,16 @@ $(function(){
       {% for fm in form %}
         {{ fm.id }}
           <tr>
+            <!--
             <td>
               {% if fm.instance.pk %}
               {{ fm.DELETE }}
               {% endif %}
             </td>
+            -->
             <td>{{ fm.lno }}</td>
             <td>{{ fm.jname }}</td>
+            <td>{{ fm.kname }}</td>
             <td>{{ fm.tel }}</td>
             <td>{{ fm.postal }}</td>
             <td>{{ fm.address1 }}</td>

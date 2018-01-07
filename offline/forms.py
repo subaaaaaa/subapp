@@ -6,7 +6,7 @@ class LeadSyncForm(forms.ModelForm):
     class Meta:
         model = Lead
         #fields = '__all__'
-        fields = ('lno', 'jname', 'tel', 'postal', 'address1', 'address2', 'address3')
+        fields = ('lno', 'jname', 'kname', 'tel', 'postal', 'address1', 'address2', 'address3')
  
 # ここが追加!!
 LeadFormSet = forms.modelformset_factory(Lead, form=LeadSyncForm, extra=100, can_delete=True)

@@ -32,6 +32,7 @@ navigator.serviceWorker.register('./sw.js', {scope:'./'})
 <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 <!--<script src="{% static 'js/jquery.jpostal.js' %}"></script>-->
 <script src="{% static 'js/indexeddb.js' %}"></script>
+<script src="{% static 'js/jquery.autoKana.js' %}"></script>
 <script>
 $(function(){
   $('#lno').val(getUniqueStr());
@@ -49,13 +50,17 @@ $(function(){
     delAll();
   });
   
+  $.fn.autoKana('#jname', '#kname', {
+    katakana : true  //true：カタカナ、false：ひらがな（デフォルト）
+  });
+
   /*
   $('#postal').jpostal({
     postcode : [
       '#postal',
     ],
-    address : {
-      '#address'  : '%3%4%5',
+    address1 : {
+      '#address1'  : '%3%4%5',
     }
   });
   */
@@ -73,17 +78,18 @@ $(function(){
     <form>
       <div class="row">
           <div class="col-sm-12">
-            <label>lNo:</label><input type="text" id="lno" size="30" maxlength="20" class="form-control linfo">
-            <label>氏名:</label><input type="text" id="jname" class="form-control linfo">
-            <label>電話番号:</label><input type="tel" id="tel" class="form-control linfo">
+            <label>lNo:</label><input type="text" id="lno" size="30" maxlength="20" class="form-control linfo" autocomplete="off">
+            <label>氏名:</label><input type="text" id="jname" class="form-control linfo" autocomplete="off">
+            <label>カナ:</label><input type="text" id="kname" class="form-control linfo" autocomplete="off">
+            <label>電話番号:</label><input type="tel" id="tel" class="form-control linfo" autocomplete="off">
             <!-- ▼郵便番号入力フィールド(7桁) -->
             <!--<label>郵便番号:</label><input type="text" size="10" id="postal" maxlength="8" class="form-control linfo">-->
-            <label>郵便番号:</label><input type="text" name="zip11" size="10" id="postal" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');" id="postal" class="form-control linfo">
+            <label>郵便番号:</label><input type="text" name="zip11" size="10" id="postal" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','addr11','addr11');" id="postal" class="form-control linfo" autocomplete="off">
             <!-- ▼住所入力フィールド(都道府県+以降の住所) -->
-            <!--<label>住所:</label><input type="text" size="60" id="address" class="form-control linfo">-->
-            <label>住所:</label><input type="text" name="addr11" size="60" id="address" class="form-control linfo">
-            <label>住所(番地):</label><input type="text" size="60" id="address2" class="form-control linfo">
-            <label>住所(マンション・建物名等):</label><input type="text" size="60" id="address3" class="form-control linfo">
+            <!--<label>住所:</label><input type="text" size="60" id="address1" class="form-control linfo">-->
+            <label>住所:</label><input type="text" name="addr11" size="60" id="address1" class="form-control linfo" autocomplete="off">
+            <label>住所(番地):</label><input type="text" size="60" id="address2" class="form-control linfo" autocomplete="off">
+            <label>住所(マンション・建物名等):</label><input type="text" size="60" id="address3" class="form-control linfo" autocomplete="off">
           </div>
       </div>
     

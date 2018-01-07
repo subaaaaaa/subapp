@@ -4,6 +4,7 @@ from django.utils import timezone
 class Lead(models.Model):
     lno = models.CharField(max_length=20)
     jname = models.CharField(max_length=50)
+    kname = models.CharField(max_length=50)
     tel = models.CharField(max_length=20)
     postal = models.CharField(max_length=15)
     address1 = models.CharField(max_length=100)
