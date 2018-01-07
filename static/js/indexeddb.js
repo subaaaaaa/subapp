@@ -17,7 +17,7 @@ function initIndexedDB(type){
      
     openRequest.onsuccess = function(event) {
       db = event.target.result;
-      console.log('IndexedDB Version:' + db.version);
+      console.log('IndexedDB initialized OK Version:' + db.version);
       if(type==1){
         readAll();
       } else if (type==2) {
@@ -44,6 +44,7 @@ function addRecord(){
     address3: $('#address3').val(),
   });
   request.onsuccess = function (event) {
+    console.log("IndexedDB add record:" + $('#lno').val());
     // 更新後の処理
     $('.linfo').val("");
     $('#lno').val(getUniqueStr());
@@ -76,6 +77,7 @@ function readAll(){
     );
     cursor.continue();
   }
+  console.log("IndexedDB read all:" + storeName);
 }
 
 function delAll(){
@@ -85,6 +87,7 @@ function delAll(){
     request.onsuccess = function (event) {
       // 全件削除後の処理
       $("#list").empty();
+      console.log('IndexedDB delete store:' + storeName);
     }
 }
 
@@ -94,7 +97,7 @@ function delRecord(lno){
     var request = store.delete(lno);
 
     request.onsuccess = function (event) {
-      console.log('Delete:' + lno);
+      console.log('IndexedDB delete record:' + lno);
     }
 }
 
@@ -122,6 +125,8 @@ function setSyncAll(){
     $('#' + formkey.replace('*', rowcount) + 'address2').val(data.address2);
     $('#' + formkey.replace('*', rowcount) + 'address3').val(data.address3);
     
+    console.log('IndexedDB read for sync:' + cursor.key);
+
     rowcount++;
     cursor.continue();
   }
@@ -132,7 +137,6 @@ function delUploadedAll(){
     delRecord($(this).text());
   });  
 }
-
 
 function getUniqueStr(myStrong){
  var strong = 1000;

@@ -1,8 +1,6 @@
 {% extends "offline/base.html" %}
 {% load staticfiles %}
 
-{% block title %}offline web sample test{% endblock title %}
-
 {% block extrahead %}
 <!--<script src='/sw.js'></script>-->
 <script src="{% static 'js/indexeddb.js' %}"></script>
@@ -19,7 +17,7 @@ $(function(){
 <div class="row">
   <div class="col-sm-12">
 
-    <h3 class="page-header">sync</h3>
+    <h3 class="page-header">Indexed DB sync sample</h3>
     <h4><a href="{% url 'offline/customer_list' %}">登録画面に戻る</a></h4>
     <h4><a href="{% url 'offline/customer_uploaded_list' %}">サーバ同期済みを確認</a></h4>
 

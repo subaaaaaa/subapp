@@ -6,7 +6,7 @@ STATIC_CACHE_KEY をキーとしてCache Storageに保存しています。
 STATIC_CACHE_KEY はキャッシュしたいファイルが更新された場合に書き換えることでキャッシュのバージョンを管理します。
 */
 const ORIGIN = location.protocol + '//' + location.hostname;
-const STATIC_CACHE_KEY = '21';
+const STATIC_CACHE_KEY = '{{ version }}';
 const STATIC_FILES = [
   ORIGIN + '/',
   ORIGIN + '/static/css/bootstrap.min.css',
