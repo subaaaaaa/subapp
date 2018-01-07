@@ -32,6 +32,7 @@ $(function(){
               <th>住所1</th>
               <th>住所2</th>
               <th>住所3</th>
+              <th>アップロード日時</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +45,7 @@ $(function(){
               <td>{{ lead.address1 }}</td>
               <td>{{ lead.address2 }}</td>
               <td>{{ lead.address3 }}</td>
+              <td>{{ lead.created_date }}</td>
             </tr>
           {% endfor %}
           </tbody>

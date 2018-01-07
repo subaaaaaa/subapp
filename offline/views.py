@@ -5,7 +5,7 @@ from offline.forms import LeadSyncFormSet
 from offline.models import Lead
 
 def customer_list(request):
-    return render(request, 'offline/customer_list.html', {'version': datetime.datetime.today()})
+    return render(request, 'offline/customer_list.html', {})
     
 def customer_uploaded_list(request):
     leads = Lead.objects.all().order_by('created_date')
