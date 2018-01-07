@@ -22,7 +22,7 @@ class SyncLeadView(FormView):
     def form_valid(self, form):
         form.save()
         ''' バリデーションを通った時 '''
-        messages.success(self.request, "保存しました")
+        #messages.success(self.request, "保存しました")
         return super().form_valid(form)
         
     def form_invalid(self, form):
