@@ -3,7 +3,7 @@ chardet==3.0.4
 colorama==0.2.5
 decorator==3.4.0
 dj-database-url==0.4.2
-Django==2.0
+Django==2.2.13
 flake8==3.5.0
 gunicorn==19.7.1
 html5lib==0.999
